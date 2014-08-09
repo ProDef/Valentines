@@ -15,13 +15,14 @@
 
   </head>
   <body ng-controller="MemberCtrl">
+  	Search:<input ng-model="query" type="text"/>
 	<table>
       <tr>
         <th>Member</th>
         <th>Age</th>
         <td>Gender</td>
       </tr>
-      <tr ng-repeat="member in members">
+      <tr ng-repeat="member in members | filter:query ">
         <td>{{member.name}}</td>
         <td>{{member.age}}</td>
         <td>{{member.gender}}</td>
