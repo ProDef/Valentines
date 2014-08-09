@@ -27,24 +27,29 @@
         return {
           list: function(callback){
             $http.get('members/members.json').success(callback);
+          },
+          find: function(name, callback){
+            $http.get('members/members.json').success(function(data) {
+              var member = data.filter(function(entry){
+                return entry.name === name;
+              })[0];
+              callback(member);
+            });
           }
         };
       });
 
-      valentinesApp.controller('MemberListCtrl', function ($scope, members){
+		valentinesApp.controller('MemberListCtrl', function ($scope, members){
         members.list(function(members) {
           $scope.members = members;
         });
       });
 
-      valentinesApp.controller('MemberDetailCtrl', function ($scope, $routeParams, $http){
-        $http.get('members/members.json').success(function(data) {
-          $scope.member = data.filter(function(entry){
-            return entry.name === $routeParams.memberName
-          })[0];
+		valentinesApp.controller('MemberDetailCtrl', function ($scope, $routeParams, members){
+        members.find($routeParams.memberName, function(member) {
+          $scope.member = member;
         });
       });
-
     </script>
   </head>
   <body>
