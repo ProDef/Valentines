@@ -11,11 +11,11 @@
       valentinesApp.config(function($routeProvider) {
         $routeProvider.
           when('/', {
-            template: '<ul><li ng-repeat="memeber in members">{{memeber.name}}</li><ul>',
+            templateUrl: 'partials/member-list.html',
             controller: 'MemberListCtrl'
           }).
-          when('/:countryName', {
-            template: '<h1>"Going to show my members personal profile in here"</h1>',
+          when('/:memberName', {
+            templateUrl: 'partials/member-detail.html',
             controller: 'MemberDetailCtrl'
           }).
           otherwise({
@@ -29,16 +29,14 @@
         });
       });
 
-      valentinesApp.controller('ValentinesDetailCtrl', function ($scope, $routeParams){
-        console.log($routeParams);
+      valentinesApp.controller('MemberDetailCtrl', function ($scope, $routeParams){
+        $scope.name = $routeParams.memberName;
       });
 
 
     </script>
-
   </head>
   <body>
-	<table>
-		<div ng-view></div>
+    <div ng-view></div>
   </body>
 </html>
