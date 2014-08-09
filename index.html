@@ -3,30 +3,42 @@
     <meta charset="utf-8">
     <title>Valentines</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-route.min.js"></script>
 
     <script>
-      var valentinesApp = angular.module('valentinesApp', []);
-      valentinesApp.controller('MemberCtrl', function ($scope, $http){
+      var valentinesApp = angular.module('valentinesApp', ['ngRoute']);
+
+      valentinesApp.config(function($routeProvider) {
+        $routeProvider.
+          when('/', {
+            template: '<ul><li ng-repeat="memeber in members">{{memeber.name}}</li><ul>',
+            controller: 'MemberListCtrl'
+          }).
+          when('/:countryName', {
+            template: '<h1>"Going to show my members personal profile in here"</h1>',
+            controller: 'MemberDetailCtrl'
+          }).
+          otherwise({
+            redirectTo: '/'
+          });
+      });
+
+      valentinesApp.controller('MemberListCtrl', function ($scope, $http){
         $http.get('members/members.json').success(function(data) {
           $scope.members = data;
         });
       });
+
+      valentinesApp.controller('ValentinesDetailCtrl', function ($scope, $routeParams){
+        console.log($routeParams);
+      });
+
+
     </script>
 
   </head>
-  <body ng-controller="MemberCtrl">
-  	Search:<input ng-model="query" type="text"/>
+  <body>
 	<table>
-      <tr>
-        <th>Member</th>
-        <th>Age</th>
-        <td>Gender</td>
-      </tr>
-      <tr ng-repeat="member in members | filter:query | orderBy:'age'">
-        <td>{{member.name}}</td>
-        <td>{{member.age}}</td>
-        <td>{{member.gender}}</td>
-      </tr>
-    </table>
+		<div ng-view></div>
   </body>
 </html>
