@@ -23,18 +23,24 @@
           });
       });
 
-      valentinesApp.controller('MemberListCtrl', function ($scope, $http){
-        $http.get('members/members.json').success(function(data) {
-          $scope.members = data;
+		valentinesApp.factory('members', function($http){
+        return {
+          list: function(callback){
+            $http.get('members/members.json').success(callback);
+          }
+        };
+      });
+
+      valentinesApp.controller('MemberListCtrl', function ($scope, members){
+        members.list(function(members) {
+          $scope.members = members;
         });
       });
 
       valentinesApp.controller('MemberDetailCtrl', function ($scope, $routeParams, $http){
-        $scope.name = $routeParams.memberName;
-
-		$http.get('members/members.json').success(function(data) {
-		$scope.member = data.filter(function(entry){
-            return entry.name === $scope.name;
+        $http.get('members/members.json').success(function(data) {
+          $scope.member = data.filter(function(entry){
+            return entry.name === $routeParams.memberName
           })[0];
         });
       });
