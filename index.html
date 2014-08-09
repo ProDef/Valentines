@@ -1,11 +1,33 @@
-<html ng-app>
+<html ng-app="valentinesApp">
   <head>
     <meta charset="utf-8">
     <title>Valentines</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+
+    <script>
+      var valentinesApp = angular.module('valentinesApp', []);
+      valentinesApp.controller('MemberCtrl', function ($scope){
+        $scope.members = [
+          {"name": "Rachel Steward", "age": 19, "gender": "female"},
+          {"name": "Nadia Smith", "age": 22, "gender": "female"},
+          {"name": "Dominic Glover","age": 20, "gender": "male"}
+        ];
+      });
+    </script>
+
   </head>
-  <body>
-    Name:<input ng-model="name" type="text"/>
-    Hello {{name}}
+  <body ng-controller="MemberCtrl">
+	<table>
+      <tr>
+        <th>Member</th>
+        <th>Age</th>
+        <td>Gender</td>
+      </tr>
+      <tr ng-repeat="member in members">
+        <td>{{member.name}}</td>
+        <td>{{member.age}}</td>
+        <td>{{member.gender}}</td>
+      </tr>
+    </table>
   </body>
 </html>
