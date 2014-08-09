@@ -22,7 +22,7 @@
         <th>Age</th>
         <td>Gender</td>
       </tr>
-      <tr ng-repeat="member in members | filter:query ">
+      <tr ng-repeat="member in members | filter:query | orderBy:'age'">
         <td>{{member.name}}</td>
         <td>{{member.age}}</td>
         <td>{{member.gender}}</td>
