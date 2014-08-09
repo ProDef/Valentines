@@ -29,10 +29,15 @@
         });
       });
 
-      valentinesApp.controller('MemberDetailCtrl', function ($scope, $routeParams){
+      valentinesApp.controller('MemberDetailCtrl', function ($scope, $routeParams, $http){
         $scope.name = $routeParams.memberName;
-      });
 
+		$http.get('members/members.json').success(function(data) {
+		$scope.member = data.filter(function(entry){
+            return entry.name === $scope.name;
+          })[0];
+        });
+      });
 
     </script>
   </head>
