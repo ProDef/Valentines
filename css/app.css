@@ -1,0 +1,53 @@
+
+
+body {
+  background-color: #DCDCDC;
+  margin:0;
+  padding:0;
+  height: 100%;
+  
+}
+
+.navbar-static-top  {
+  background-color: white;
+  color: black;
+  position: absolute;
+  top: 0px;
+  width:  100%;
+ }
+
+
+.navbar-nav  {
+  font-family:Arial, Helvetica, sans-serif;
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    float: left;
+    width: 90px;
+    text-align: center;
+}
+
+a.navbar-nav:link    {color:black;}
+a.navbar-nav:visited {color:black;}
+a.navbar-nav:hover   {color:white;}
+a.navbar-nav:active  {color:white;}
+
+a.navbar-nav:hover,a.navbar-nav:active {background:black;}
+
+
+#user-page {
+  position: relative;
+}
+
+.user-details	{
+  font-family:Arial, Helvetica, sans-serif;
+  padding:1px 40px; 
+  background:white;
+  border-radius: 10px;
+  position:absolute;
+  left:3%;
+  top: 90px;
+  width: 50%;
+}
