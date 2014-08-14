@@ -14,7 +14,7 @@
             templateUrl: 'partials/member-list.html',
             controller: 'MemberListCtrl'
           }).
-          when('/:memberName', {
+          when('/:memberUser', {
             templateUrl: 'partials/member-detail.html',
             controller: 'MemberDetailCtrl'
           }).
@@ -23,15 +23,22 @@
           });
       });
 
-		valentinesApp.factory('members', function($http){
+      	valentinesApp.factory('members', function($http){
+
+		function getData(callback){
+          $http({
+            method: 'GET',
+            url: 'members/members.json',
+            cache: true
+          }).success(callback);
+        }
+
         return {
-          list: function(callback){
-            $http.get('members/members.json').success(callback);
-          },
-          find: function(name, callback){
-            $http.get('members/members.json').success(function(data) {
+          list: getData,
+          find: function(user, callback){
+            getData(function(data) {
               var member = data.filter(function(entry){
-                return entry.name === name;
+                return entry.user === user;
               })[0];
               callback(member);
             });
@@ -46,7 +53,7 @@
       });
 
 		valentinesApp.controller('MemberDetailCtrl', function ($scope, $routeParams, members){
-        members.find($routeParams.memberName, function(member) {
+        members.find($routeParams.memberUser, function(member) {
           $scope.member = member;
         });
       });
