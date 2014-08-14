@@ -36,6 +36,16 @@ a.navbar-nav:active  {color:white;}
 
 a.navbar-nav:hover,a.navbar-nav:active {background:black;}
 
+.search		{
+	font-family:Arial, Helvetica, sans-serif;
+  padding:1px 15px; 
+  background:white;
+  border-radius: 10px;
+  position:absolute;
+  left:30%;
+  top: 19px;
+  width: 258px;
+}
 
 #user-page {
   position: relative;

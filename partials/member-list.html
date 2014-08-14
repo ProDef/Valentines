@@ -1,8 +1,11 @@
-
+<div ng-controller="MemberListCtrl">
+  	<div class="search">
+  		Search:<input ng-model="query" type="text"/>
+  	</div>
 <div id"user">
 	<div class="user-details">
 		<ul>
-  <li ng-repeat="member in members">
+  <li ng-repeat="member in members | filter:query">
   <a href="#/{{member.user}}">{{member.user}}</a>
 </li>
 <ul>
